@@ -20,7 +20,8 @@ The server should now be listening on port 80 of your machine.
 # Configuration: 
 
 Create your own server configuration with your favorite text editor:
-```
+
+```javascript
 // server.js
 
 require('abc/main')({
@@ -59,7 +60,7 @@ The superuser needs a working node installation to listen on port 80.
 If you are unsure of the superuser's node installation, try listening  
 on a higher port as your own user:
 
-```
+```javascript
 // server.js
 require('abc/main')({port: 8080});
 ```

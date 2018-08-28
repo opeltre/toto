@@ -1,0 +1,29 @@
+#carte {
+    justify-content: space-around;
+    align-items: center;
+}
+#carte * {
+    color: #fefde9;
+}
+#pic, #info {
+    padding: 20px;
+}
+#info {
+    text-align: center;
+}
+#welcome {
+    font-size: 12px;
+    font-style: italic;
+}
+#nav {
+    justify-content: space-around;
+    padding: 50px;
+}
+.nav {
+    color: #fefde9;
+    padding: 5px;
+    align-items: center;
+}
+.nav span {
+    text-align: center;
+}

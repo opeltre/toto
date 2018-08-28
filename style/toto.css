@@ -1,0 +1,36 @@
+.flex-h {
+    display: flex;
+    flex-flow: row;
+}
+.flex-v {
+    display: flex;
+    flex-flow: column;
+}
+.big {
+    min-height: 100%;
+}
+.grow {
+    flex-grow: 1;
+}
+.wrap {
+    flex-wrap: wrap;
+}
+.stretch {
+    align-items: stretch;
+}
+.ft0, .ft0 * {
+    font-family: 'GlacialIndifference';
+}
+.center {
+    text-align: center;
+}
+.right {
+    text-align: right;
+}
+.left {
+    text-align: left;
+}
+.hide{
+    display: none;
+}
+

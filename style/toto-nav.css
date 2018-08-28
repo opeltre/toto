@@ -1,0 +1,97 @@
+html {
+    height: 100%;
+}
+body {
+    min-height: 100%;
+}
+
+
+#abc-div {
+    height: 100%;
+}
+#abc-div, #abc-nav {
+    background-color: #1c282a;
+    color: #fefde9;
+}
+
+
+#abc-home .icon {
+    margin: 10 60 0 60;
+}
+#abc-head {
+    padding: 0;
+    margin: 0;
+    align-items: center;
+}
+#abc-head h3 {
+    margin: 4px;
+    color: #6a626b;
+}
+#abc-pathseq {
+    font-size: 20px;
+}
+#abc-pathseq a {
+    color: #6a626b;
+}
+#abc-pathseq a:hover, #abc-pathseq .delim {
+    color: #cab696;
+}
+
+
+#abc-body > * {
+    margin: 10px;
+}
+#abc-nav, #abc-right {
+    padding: 10px;
+}
+
+
+#abc-nav a.focus.dir {
+    color: #edeadf !important;
+}
+#abc-nav a.focus {
+    color: #dadbf2 !important;
+}
+#abc-nav a.file {
+    color: #cab696;
+}
+#abc-nav pre {
+    margin: 0px;
+}
+
+
+#abc-view {
+    background-color: #fefdef;
+    border: 5px solid #6a626b;
+    padding: 0px;
+}
+#abc-html {
+    margin: 20;
+    color: #1c282a;
+}
+#abc-html pre, #abc-html code {
+    font-size: 16px;
+    background-color: #1c282a;
+    color: #fefde9;
+}
+#abc-html pre {
+    padding: 3px;
+    margin: 0 30 0 30;
+}
+#abc-pdf {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    border: none;
+    margin: 0;
+}
+
+
+#abc-right {
+    min-width: 40px;
+}
+#abc-foot {
+    height: 20px;
+}
+
+

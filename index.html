@@ -1,94 +1,38 @@
 <html>
 
     <head>
-        <script src='http://mathchat.fr:8083/lib/vv_bundle.js'></script>
+        <script src='/lib/vv_bundle.js'></script>
 
         <link rel='stylesheet' href='style/main.css'></link>
-        <link rel='stylesheet' href='style/abc-nav.css'></link>
-        <link rel='stylesheet' href='style/abc.css'></link>
+        <link rel='stylesheet' href='style/toto-nav.css'></link>
+        <link rel='stylesheet' href='style/toto.css'></link>
         <link rel='stylesheet' href='style/index.css'></link>
         <link rel='stylesheet' href='style/fonts.css'></link>
     </head>
 
     <body>
     <script>
-        let icon =
-            i => vv('img', {src: `/images/win95icons/Icon_${i}.ico`});
+        let toto = 
+            vv('pre', [
+                vv('code').html(
+                    '( 0 + 0 ) \n' + 
+                    '          \n' + 
+                    ' toto.js    '
+                )
+            ])
+            .on('click', _ => window.location = '/root');
 
-        let pic = 
-            ['#pic', [
-                ['img', {
-                    src: 'images/seine.jpg',
-                    width: '400'
-                }]
-            ]];
+        vv('.flex-v.big', [
+            ['.grow'],
+            ['.flex-h', [
+                ['.grow'],
+                toto,
+                ['.grow']
+            ]],
+            ['.grow']
+        ])
+        ();
 
-        let info = 
-            ['#info', [
-                ['h1.ft0', ['Olivier Peltre']],
-                ['p', ["doctorant de mathématiques"]],
-                ['p', ["imj-prg -- Paris 7"]],
-                ['p', ["olivier [*] peltre.xyz"]],
-                ['p', ["bureau n° 656"]],
-                ['.icon', [
-                    ['i', {float: "center"}, [icon(29)]],
-                    ['i', {float: "center"}, [icon(14)]],
-                    ['i', {float: "center"}, [icon(69)]]
-                ]],
-                ['p#welcome', ["Bienvenue sur mon site web"]]
-            ]];
-
-        let nav = 
-            (name, i=51, href=name) => vv('a.nav.flex-h', 
-                {
-                    href: href || name,
-                },
-                [
-                    icon(i),//.attr({width:'16'}),
-                    ['span.grow', [' -> ' + name]]
-                ]
-            );
-
-        vv('div.flex-v.big', [
-            ['#carte.grow.flex-h.wrap', [pic, info]],
-            ['#nav.flex-h.wrap', [
-                nav('cours', 24),
-                nav('exercices', 35),
-                nav('recherche', 23),
-                nav('code', 18)
-            ]]
-        ])();   
-
-        /* michaux:
-        Infini comme un fait physique, comme la mer
-        pour laquelle trouver il suffit de quitter la terre.
-        *L'infini turbulent (p.200)*
-        */
-
-        let strip = [25, 40, 56, 55, 65, 68, 27, 
-            11, 13, 51, 66, 22, 24, 58, 69, 41, 26, 42];
-
-        let anim = 
-            (i=0, p) => {
-                let step = () => __.sleep(1000)
-                    .then(() => icon(strip[i]).plant('#strip')());
-                p = p || Promise.resolve();
-                return i === strip.length
-                    ? p
-                    : anim(i+1, p.then(step));
-            }
-
-        anim();
-
-        let icons = i => vv('div', [
-            ['img', {src: `/images/win95icons/Icon_${i+1}.ico`}],
-            ['div', [''+(i+1)]]
-        ]);
-
-        vv('#icons.flex-h.wrap', __.range(69).map(icons))();
-/*
-*/
-        
     </script>
     </body>
 

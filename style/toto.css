@@ -8,6 +8,7 @@
 }
 .big {
     min-height: 100%;
+    height: 100%;
 }
 .grow {
     flex-grow: 1;

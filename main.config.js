@@ -2,9 +2,9 @@
 
 module.exports = {
     apps: [{
-        name: 'abc',
+        name: 'toto',
         watch: ['./'],
-        ignore_watch: [],
+        ignore_watch: ['root'],
         script: 'main.js',
 	env: 'development'
     }]

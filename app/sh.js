@@ -30,8 +30,6 @@ const fs = require('fs').promises,
 let sh = {};
 let err = console.log;
 
-console.log(__dirname);
-
 let pathfrom = 
     dir => dir[0] === '/'
         ? relname => path.join(dir, relname)

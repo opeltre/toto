@@ -6,79 +6,79 @@ body {
 }
 
 
-#abc-div {
+#toto-div {
     height: 100%;
 }
-#abc-div, #abc-nav {
+#toto-div, #toto-nav {
     background-color: #1c282a;
     color: #fefde9;
 }
 
 
-#abc-home .icon {
+#toto-home .icon {
     margin: 10 60 0 60;
 }
-#abc-head {
+#toto-head {
     padding: 0;
     margin: 0;
     align-items: center;
 }
-#abc-head h3 {
+#toto-head h3 {
     margin: 4px;
     color: #6a626b;
 }
-#abc-pathseq {
+#toto-pathseq {
     font-size: 20px;
 }
-#abc-pathseq a {
+#toto-pathseq a {
     color: #6a626b;
 }
-#abc-pathseq a:hover, #abc-pathseq .delim {
+#toto-pathseq a:hover, #toto-pathseq .delim {
     color: #cab696;
 }
 
 
-#abc-body > * {
+#toto-body > * {
     margin: 10px;
 }
-#abc-nav, #abc-right {
+#toto-nav, #toto-right {
     padding: 10px;
 }
 
 
-#abc-nav a.focus.dir {
+#toto-nav a.focus.dir {
     color: #edeadf !important;
 }
-#abc-nav a.focus {
+#toto-nav a.focus {
     color: #dadbf2 !important;
 }
-#abc-nav a.file {
+#toto-nav a.file {
     color: #cab696;
 }
-#abc-nav pre {
+#toto-nav pre {
     margin: 0px;
 }
 
 
-#abc-view {
+#toto-view {
     background-color: #fefdef;
     border: 5px solid #6a626b;
     padding: 0px;
 }
-#abc-html {
+#toto-html {
     margin: 20;
     color: #1c282a;
 }
-#abc-html pre, #abc-html code {
+#toto-html pre, #toto-html code {
     font-size: 16px;
     background-color: #1c282a;
-    color: #fefde9;
+    color: #eceada;
 }
-#abc-html pre {
+#toto-html pre {
     padding: 3px;
     margin: 0 30 0 30;
 }
-#abc-pdf {
+#toto-pdf {
     box-sizing: border-box;
     width: 100%;
     height: 100%;
@@ -87,10 +87,10 @@ body {
 }
 
 
-#abc-right {
+#toto-right {
     min-width: 40px;
 }
-#abc-foot {
+#toto-foot {
     height: 20px;
 }
 

@@ -25,7 +25,7 @@
 
 const fs = require('fs').promises,
     path = require('path'),
-    {__} = require('../vv/vv_back');
+    {__} = require('../dist/vv_back');
 
 let sh = {};
 let err = console.log;

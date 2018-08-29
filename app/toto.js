@@ -3,7 +3,7 @@
 let sh = require('./sh'),
     path = require('path'),
     md = require('./md'),
-    {__, _vv, vv_, vv} = require('../vv/vv_back.js');
+    {__, _vv, vv_, vv} = require('../dist/vv_back.js');
 
 let icon = i => vv('div.icon', [
     ['img', {src: `/images/win95icons/Icon_${i}.ico`}]

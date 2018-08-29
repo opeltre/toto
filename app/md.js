@@ -1,4 +1,4 @@
-let {__} = require('../vv/vv_back');
+let {__} = require('../dist/vv_back');
 let marked = require('marked');
 
 function parser (text) {

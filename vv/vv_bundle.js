@@ -1,1 +1,0 @@
-/home/shevket/js/vv/vv_bundle.js

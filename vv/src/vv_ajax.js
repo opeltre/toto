@@ -1,1 +1,0 @@
-/home/shevket/js/vv/src/vv_ajax.js

@@ -1,7 +1,7 @@
 let express = require('express'),
     $ = require('path').join,
     PWD = __dirname,
-    {__} = require('./vv/vv_back.js'),
+    {__} = require('./dist/vv_back.js'),
     toto = require('./app/toto.js');
 
 __.logs('main')(require.main.filename);

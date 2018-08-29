@@ -1,1 +1,0 @@
-/home/shevket/js/vv/src/_vv.js

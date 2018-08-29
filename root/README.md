@@ -1,36 +1,40 @@
 # toto.js
 
-\[ \left(
+\[
+\left(
 \begin{array}{ccc}
-\sim &  & \prec \\
-0 & + & 0  \\
-& \bigcup &
+\sim & & \prec \\
+0 & + & 0 \\
+& \bigcup & 
 \end{array}
-\right) \]
+\right)
+\]
 
 - toto is on [npm](https://npmjs.com/package/totojs)!
 - toto is on [github](https://github.com/opeltre/toto)!
 
 # Installation:
 
-Download the npm package to the directory of your choice: 
+Download the npm package to a directory of your choice: 
 ```bash
 $ cd /srv/http/<my-server>
 $ npm i totojs
 ```
-Run it using the default configuration with:
+Run it with:
 ```bash
-$ sudo node node_modules/totojs/server.js
+$ node node_modules/totojs/main.js
 ```
-The server should now be listening on port 80 of your machine. 
+The default server should now be listening on port 8090 of your machine. 
 
 # Configuration: 
 
-Create your own server configuration with your favorite text editor:
-```
-// server.js
 
-let toto = require('totojs/server');
+Create a launch file with your favorite text editor:
+
+```javascript
+// toto.js
+
+let toto = require('totojs');
 
 let config = {
     port: 80,   
@@ -46,33 +50,20 @@ let config = {
     ],
 };
 
-toto(config);
-
+toto.server(config);
 ```
 
-You may now run it with: 
-```
-$ sudo node server.js
-```
+Run it with: 
 
-# Process monitoring:
-
-You can use pm2 to ensure your app stays online and updated: 
-
-``` 
-$ cp node_modules/totojs/server.config.js ./
-$ npm i pm2
-$ sudo pm2 start server.config.js
+```bash
+$ sudo node toto.js
 ```
 
 # Troubleshooting:
 
-The superuser needs a working node installation to listen on port 80.  
-If you are unsure of the superuser's node installation, try listening  
-on a higher port as your own user:
+The default HTTP port is 80 and root-reserved, 
+so root needs a working node installation.
 
-```
-// server.js
-require('totojs/main')({port: 8080});
-```
+If you are unsure of the superuser's node installation, try listening  
+on available ports above 1024 as your own user.
 

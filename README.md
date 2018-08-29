@@ -1,30 +1,35 @@
 # toto.js
 
 ```
-(0 + 0) __ salut c'est toto!
+( 0 + 0 )
 ```
+
+- toto is on [npm](https://npmjs.com/package/totojs)!
 
 # Installation:
 
-Download the npm package to the directory of your choice: 
+Download the npm package to a directory of your choice: 
 ```bash
 $ cd /srv/http/<my-server>
 $ npm i totojs
 ```
-Run it using the default configuration with:
+Run it with:
 ```bash
-$ sudo node node_modules/totojs/server.js
+$ node node_modules/totojs/main.js
 ```
-The server should now be listening on port 80 of your machine. 
+The default server should now be listening on port 8090 of your machine. 
 
 # Configuration: 
 
-Create your own server configuration with your favorite text editor:
+
+Create a launch file with your favorite text editor:
 
 ```javascript
-// server.js
+// toto.js
 
-require('totojs/main')({
+let toto = require('totojs');
+
+let config = {
     port: 80,   
     index: 'index.html',
     dirs: [
@@ -36,22 +41,22 @@ require('totojs/main')({
             href : '<url-to-other-dir>'
         }
     ],
-});
+};
+
+toto.server(config);
 ```
 
-You may now run it with: 
-```
-$ sudo node server.js
+Run it with: 
+
+```bash
+$ sudo node toto.js
 ```
 
 # Troubleshooting:
 
-The superuser needs a working node installation to listen on port 80.  
-If you are unsure of the superuser's node installation, try listening  
-on a higher port as your own user:
+The default HTTP port is 80 and root-reserved, 
+so root needs a working node installation.
 
-```javascript
-// server.js
-require('totojs/main')({port: 8080});
-```
+If you are unsure of the superuser's node installation, try listening  
+on available ports above 1024 as your own user.
 

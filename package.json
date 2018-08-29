@@ -12,5 +12,5 @@
     "test": "echo \"(0 + 0) __ salut c'est toto! \" "
   },
   "author": "Olivier Peltre",
-  "license": "GPL"
+  "license": "GPLv2"
 }

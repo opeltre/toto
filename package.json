@@ -1,8 +1,8 @@
 {
   "name": "totojs",
   "version": "0.0.0",
-  "description": "toto is a simple yet naughty restful server",
-  "main": "index.js",
+  "description": "a simple yet naughty restful server",
+  "main": "main.js",
   "dependencies": {
     "express": "^4.16.3",
     "marked": "^0.5.0"

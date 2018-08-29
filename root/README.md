@@ -56,7 +56,7 @@ toto.server(config);
 Run it with: 
 
 ```bash
-$ sudo node toto.js
+$ sudo node toto.js 
 ```
 
 # Troubleshooting:
@@ -67,3 +67,11 @@ so root needs a working node installation.
 If you are unsure of the superuser's node installation, try listening  
 on available ports above 1024 as your own user.
 
+# Process monitoring: 
+
+You can use pm2 to run toto in the background: 
+
+```
+$ npm i pm2
+$ sudo pm2 start toto.js --watch
+```

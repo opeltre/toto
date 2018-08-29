@@ -4,7 +4,6 @@ let express = require('express'),
     {__} = require('./dist/vv_back.js'),
     toto = require('./app/toto.js');
 
-__.logs('main')(require.main.filename);
 
 let d_conf = {
     port : 8090,
@@ -76,7 +75,9 @@ function router (conf) {
 function server (conf = d_conf) {
     
     let srv = express(),
-        app = router(conf = d_conf)
+        app = router(conf);
+
+    __.logs('( 0 + 0 ) @ :' + (conf.port || 80))(require.main.filename);
 
     srv.use('/', app);
     return srv.listen(conf.port || 80);
@@ -100,9 +101,9 @@ function parse (conf, pwd) {
         Object.assign(d, {path : abs(d.path)});
 
     return Object.assign(conf, {
-        dirs : conf.dirs.map(abs_path),
-        static : conf.static.map(abs),
-        index : abs(conf.index)
+        dirs : (conf.dirs || []).map(abs_path),
+        static : (conf.static || []).map(abs),
+        index : abs(conf.index || d_conf.index)
     });
 }
 

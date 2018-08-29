@@ -1,6 +1,10 @@
 @font-face {
-    font-family:"Retroscape";
-    src: url("/fonts/retroscape/Retroscape.ttf");
+    font-family:"nouveau_ibm";
+    src: url("/fonts/nouveau_ibm/Nouveau_IBM.ttf");
+}
+@font-face {
+    font-family:"iosevka";
+    src: url('/fonts/iosevka/iosevka-regular.ttf');
 }
 @font-face {
     font-family:"GlacialIndifference";
@@ -10,56 +14,8 @@
     font-family:"connection";
     src: url("/fonts/connection/Connection.otf");
 }
+@font-face {
+    font-family:"Retroscape";
+    src: url("/fonts/retroscape/Retroscape.ttf");
+}
 
-@font-face {
-    font-family:"hyperspace";
-    src: url("/fonts/hyperspace/Hyperspace_Bold.otf");
-}
-@font-face {
-    font-family:"libertine";
-    src: url("/fonts/LinLibertine/LinLibertine_Rah.ttf");
-}
-@font-face {
-    font-family:"nouveau_ibm";
-    src: url("/fonts/nouveau_ibm/Nouveau_IBM.ttf");
-}
-@font-face {
-    font-family:"symbolism";
-    src: url('/fonts/symbolism/Symbolism.ttf');
-}
-@font-face {
-    font-family:"bowman";
-    src: url('/fonts/bowman/Bowman.ttf');
-}
-@font-face {
-    font-family:"cone";
-    src: url('/fonts/cone/Cone.ttf');
-}
-@font-face {
-    font-family:"nimbus";
-    src: url('/fonts/nimbus/nimbusmono-regular.otf');
-}
-@font-face {
-    font-family:"old-standard";
-    src: url('/fonts/old-standard/oldstandard-2.0.2.ttf/OldStandard-Regular.ttf');
-}
-@font-face {
-    font-family:"anonymous-pro";
-    src: url('/fonts/anonymous-pro/Anonymous_Pro.ttf');
-}
-@font-face {
-    font-family:"iosevka";
-    src: url('/fonts/iosevka/iosevka-regular.ttf');
-}
-@font-face {
-    font-family: "nord-sud";
-    src: url('/fonts/nord-sud/ttf/NordSudA.ttf');
-}
-@font-face {
-    font-family: "judson";
-    src: url('/fonts/judson/Judson.ttf');
-}
-@font-face {
-    font-family: "liberation-serif";
-    src: url('/fonts/liberationSerif/LiberationSerif.ttf');
-}

@@ -62,11 +62,9 @@ function parser (text) {
                 ? str => str.replace(/<\/p>\s*$/, '')
                 : __.id
         ];
-        __.log(INLINE)
         INLINE = name === 'imath';
-        __.log(INLINE)
 
-        return __.pipe(marked, ...strip, __.logs('strip:'));
+        return __.pipe(marked, ...strip);
     }
 
     function read (str, lexers=lex) {

@@ -1,3 +1,7 @@
+# Setup guide
+
+Toto runs in [nodejs](https://nodejs.org) -
+best installed via [nvm](https://github.com/creationix/nvm).
 
 ## Installation:
 
@@ -55,7 +59,8 @@ try listening on available ports above 1024 as your own user.
 
 ## Process monitoring: 
 
-You can use pm2 to run toto in the background: 
+You can use [pm2](http://pm2.keymetrics.io/)
+to run toto in the background: 
 
 ```
 $ npm i pm2

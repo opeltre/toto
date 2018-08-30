@@ -1,0 +1,55 @@
+html, #toto-div, #toto-nav {
+    background-color: #333;
+    color: #fff;
+}
+
+
+#toto-pathseq {
+    font-size: 20px;
+}
+.toto-head0, .toto-head1:hover {
+    color: #98a;
+}    
+.toto-head0:hover, .toto-head1 {
+    color: #cad;
+}
+
+
+#toto-nav a {
+    font-size: smaller;
+}
+#toto-nav a.dir {
+    color: #97a;
+}
+#toto-nav a.focus.dir {
+    color: #cad !important;
+}
+#toto-nav a.file {
+    color: #a87;
+}
+#toto-nav a.file.focus {
+    color: #fc7 !important;
+}
+
+
+#toto-view {
+    border: 5px solid #98a;
+    background-color: #fee;
+}
+#toto-html {
+    color: #333;
+}
+#toto-html pre, #toto-html code, .toto-code {
+    background-color: #333;
+    color: #cad;
+}
+
+
+.toto-btn {
+    border: solid 1px #a87;
+    padding: 5px;
+    background-color: #333;
+    color: #fc7;
+}
+
+

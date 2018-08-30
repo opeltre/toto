@@ -1,80 +1,134 @@
 let {__} = require('../dist/vv_back');
 let marked = require('marked');
 
+/* 
+
+Lexer :: 
+    Str  
+    ->  
+    { 
+        match   : [ Str, Str, Str ] || Null,
+        lexer   : Lexer,
+        index   : Int
+    }
+
+lexer :: 
+    { 
+        read    : [ Str, Str ],
+        write   : [ Str, Str ],
+        state   : Bool,
+        _name    : Str
+    } 
+    -> 
+    Lexer
+
+*/
+
 function parser (text) {
     
     let inlineMath = lexer()
+        ._name('imath')
         .read([ /(\\){1,2}\(/, /(\\){1,2}\)/ ])
         .write([
             '<script type="math/tex">',
             '</script>'
-        ]);
+        ])
 
     let displayMath = lexer()
+        ._name('math')
         .read([ /(\\){1,2}\[/, /(\\){1,2}\]/ ])
         .write([
             '<script type="math/tex; mode=display">',
             '</script>'
         ]);
 
-    let lexers = [inlineMath, displayMath];
+    let lex = [inlineMath, displayMath];
 
-    let inMath = false;
+    let MATH = false;
+    let INLINE = false;
 
     return read(text);
 
-    function read (str) {
+    function mark (lexer) {
+
+        let name = 
+            lexer._name && lexer._name();
+
+        let strip = [
+            INLINE
+                ? str => str.replace(/^\s*<p>/, '') 
+                : __.id,
+            name === 'imath'
+                ? str => str.replace(/<\/p>\s*$/, '')
+                : __.id
+        ];
+        __.log(INLINE)
+        INLINE = name === 'imath';
+        __.log(INLINE)
+
+        return __.pipe(marked, ...strip, __.logs('strip:'));
+    }
+
+    function read (str, lexers=lex) {
         
-        matches = lexers
-            .map(lex => lex(str))
-            .filter(x => x)
-            .sort((x,y) => x[0].length >= y[0].length);
+        let matches = lexers
+            .map(__.$(str))
+            .filter(x => x.match)
+            .sort((x,y) => x.index >= y.index);
 
         if (!matches.length)
-            return marked(str);
+            return mark({})(str);
 
-        m = matches[0];
+        let {lexer, match} = matches[0];
 
-        if (!inMath) {
-            console.log("using marked");
-            m[0] = marked(m[0]);
-        }
-        inMath = !inMath;
-        
-        return m
-            .slice(0,2)
-            .join(' ')
-            .concat(read(m[2]));
+        let md = MATH ? __.id : mark(lexer);
+        MATH = !MATH;
 
+        let before = md(match[0]) + match[1],
+            after = match[2],
+            lex = matches.map(x => x.lexer);
+
+        return before + read(after, lex);
     }
 
+    function lexer (C) {
 
-    function lexer () {
-        var self = {
-            read : null,
-            write : null,
-            state : 0,
-        };
+        let self = {
+                _name : '<lexer>',
+                read :  null,
+                write : null,
+                state : 0,
+            };
+
+        Object.assign(self, C || {});
+
+        let lex = __.pipe(
+            m => Object.assign(
+                self, 
+                {state : (self.state + !!m) % 2}
+            ),
+            lexer
+        );
 
         function my (str) {
-            var m = my.match(str);
-            if (m) 
-                m = [m[0], self.write[self.state], m[1]];
-                my.state((self.state + 1)%2);
-            return m;
-        }
 
-        my.match = str => {
-            var m = str.match(self.read[self.state]);
-            return m ? [
-                    str.slice(0, m.index),
+            let i = self.state;
+            let m = str.match(self.read[i]);
+
+            return {
+                match : m && [
+                    str.slice(0, m.index), 
+                    self.write[i],
                     str.slice(m.index + m[0].length)
-                ]
-                : null; 
+                ],
+                index : m && m.index,
+                lexer : lex(m),
+            };
         }
-        return __.getset(my, self);
 
+        return __.getset(my, self);
     }
+
 }
 
 module.exports = parser;

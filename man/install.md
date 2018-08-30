@@ -1,19 +1,5 @@
-# toto.js
 
-\[
-\left(
-\begin{array}{ccc}
-\sim & & \prec \\
-0 & + & 0 \\
-& \bigcup & 
-\end{array}
-\right)
-\]
-
-- toto is on [npm](https://npmjs.com/package/totojs)!
-- toto is on [github](https://github.com/opeltre/toto)!
-
-# Installation:
+## Installation:
 
 Download the npm package to a directory of your choice: 
 ```bash
@@ -26,7 +12,7 @@ $ node node_modules/totojs/main.js
 ```
 The default server should now be listening on port 8090 of your machine. 
 
-# Configuration: 
+## Configuration: 
 
 
 Create a launch file with your favorite text editor:
@@ -59,15 +45,15 @@ Run it with:
 $ sudo node toto.js 
 ```
 
-# Troubleshooting:
+## Troubleshooting:
 
 The default HTTP port is 80 and root-reserved, 
 so root needs a working node installation.
 
-If you are unsure of the superuser's node installation, try listening  
-on available ports above 1024 as your own user.
+If you are unsure of the superuser's node installation, 
+try listening on available ports above 1024 as your own user.
 
-# Process monitoring: 
+## Process monitoring: 
 
 You can use pm2 to run toto in the background: 
 

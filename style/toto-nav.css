@@ -1,19 +1,9 @@
 html {
     height: 100%;
 }
-body {
+body , #toto-div {
     min-height: 100%;
 }
-
-
-#toto-div {
-    height: 100%;
-}
-#toto-div, #toto-nav {
-    background-color: #1c282a;
-    color: #fefde9;
-}
-
 
 #toto-home .icon {
     margin: 10 60 0 60;
@@ -23,20 +13,6 @@ body {
     margin: 0;
     align-items: center;
 }
-#toto-head h3 {
-    margin: 4px;
-    color: #6a626b;
-}
-#toto-pathseq {
-    font-size: 20px;
-}
-#toto-pathseq a {
-    color: #6a626b;
-}
-#toto-pathseq a:hover, #toto-pathseq .delim {
-    color: #cab696;
-}
-
 
 #toto-body > * {
     margin: 10px;
@@ -46,45 +22,10 @@ body {
 }
 
 
-#toto-nav a.focus.dir {
-    color: #edeadf !important;
-}
-#toto-nav a.focus {
-    color: #dadbf2 !important;
-}
-#toto-nav a.file {
-    color: #cab696;
-}
 #toto-nav pre {
     margin: 0px;
 }
 
-
-#toto-view {
-    background-color: #fefdef;
-    border: 5px solid #6a626b;
-    padding: 0px;
-}
-#toto-html {
-    margin: 20;
-    color: #1c282a;
-}
-#toto-html pre, #toto-html code {
-    font-size: 16px;
-    background-color: #1c282a;
-    color: #eceada;
-}
-#toto-html pre {
-    padding: 3px;
-    margin: 0 30 0 30;
-}
-#toto-pdf {
-    box-sizing: border-box;
-    width: 100%;
-    height: 100%;
-    border: none;
-    margin: 0;
-}
 
 
 #toto-right {
@@ -93,5 +34,3 @@ body {
 #toto-foot {
     height: 20px;
 }
-
-

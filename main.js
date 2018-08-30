@@ -1,26 +1,19 @@
 let express = require('express'),
     $ = require('path').join,
-    PWD = __dirname,
-    {__} = require('./dist/vv_back.js'),
-    toto = require('./app/toto.js');
+    {__, vv_, vv} = require('./dist/vv_back'),
+    toto = require('./app/toto'),
+    conf = require('./conf');
 
-
-let d_conf = {
-    port : 8090,
-    index : './index.html',
-    dirs : [
-        {path: './root', href: 'root'}
-    ],
-    static: ['images', 'fonts', 'style', 'lib'],
-    style : ['toto', 'toto-nav', 'main', 'fonts'],
-    scripts : [
-        "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js",
-        'parser', 
-        'mathjax'
-    ]
-};
-d_conf = parse(d_conf, PWD);
-
+/* Conf :: {
+ *      port    : Int
+ *      index   : Str
+ *      dirs    : [ { path : Str, href : Str } ]
+ *      static  : [ Str ]
+ *      style   : [ Str ]
+ *      scripts : [ Str ]
+ *  }
+ */
+let D = conf.parse(conf.dft, module); 
 
 function mount ({path, href, style, scripts}) {
 
@@ -28,8 +21,8 @@ function mount ({path, href, style, scripts}) {
         app => app.get(
             $('/', href + '*'),
             toto(path, $('/', href))
-                .style(style || d_conf.style)
-                .scripts(scripts || d_conf.scripts)
+                .style(style || D.style)
+                .scripts(scripts || D.scripts)
         );
 
     let rawMt =
@@ -48,39 +41,37 @@ function statique (dir) {
     );
 }
         
-function router (conf) {
+function router (C) {
 
-    conf = conf
-        ? parse(conf, $(require.main.filename, '..'))
-        : d_conf;
+    C = C ? conf.parse(C, require.main) : D;
 
     let app = express.Router();
 
     app.get(
         '/', 
-        (req, res) => res.sendFile(conf.index)
+        (req, res) => res.sendFile(C.index)
     );
 
-    (conf.dirs || d_conf.dirs)
+    (C.dirs || D.dirs)
         .map(mount)
         .forEach(__.$(app));
 
-    [...(conf.static || []), ...d_conf.static]
+    [...(C.static || []), ...D.static]
         .map(statique)
         .forEach(__.$(app));
 
     return app;
 }
 
-function server (conf = d_conf) {
+function server (C = D) {
     
     let srv = express(),
-        app = router(conf);
+        app = router(C);
 
-    __.logs('( 0 + 0 ) @ :' + (conf.port || 80))(require.main.filename);
+    __.logs('( 0 + 0 ) @ :' + (C.port || 80))(require.main.filename);
 
     srv.use('/', app);
-    return srv.listen(conf.port || 80);
+    return srv.listen(C.port || 80);
 };
 
 module.exports = {
@@ -91,19 +82,4 @@ module.exports = {
 if (require.main === module)
     server();
 
-
-function parse (conf, pwd) {
-
-    let abs = path => 
-        path[0] === '/' ? path : $(pwd, path);
-
-    let abs_path = d => 
-        Object.assign(d, {path : abs(d.path)});
-
-    return Object.assign(conf, {
-        dirs : (conf.dirs || []).map(abs_path),
-        static : (conf.static || []).map(abs),
-        index : abs(conf.index || d_conf.index)
-    });
-}
 

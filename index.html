@@ -5,28 +5,48 @@
 
         <link rel='stylesheet' href='style/main.css'>
         <link rel='stylesheet' href='style/toto-nav.css'>
+        <link rel='stylesheet' href='style/toto-dark.css'>
         <link rel='stylesheet' href='style/toto.css'>
-        <link rel='stylesheet' href='style/index.css'>
-        <link rel='stylesheet' href='style/fonts.css'>
     </head>
 
     <body>
+    <style>
+    </style>
     <script>
-        let toto = 
-            vv('pre', [
-                vv('code').html(
-                    '( 0 + 0 ) \n' + 
-                    '          \n' + 
-                    ' toto.js    '
-                )
-            ])
-            .on('click', _ => window.location = '/root');
+        let totos = [
+            '          \n' + 
+            '  0 + 0   \n' + 
+            '          \n' + 
+            '    ?     \n' + 
+            '            ' ,
 
-        vv('.flex-v.big', [
+            '  ~   <   \n' + 
+            '( 0 + 0 ) \n' + 
+            '    U     \n' + 
+            '          \n' + 
+            '  toto!    ' 
+
+        ];
+       
+        let click = __.do(
+            vv.emit('toto', {toto: totos[1]}),
+            _ => __.sleep(1000)
+                .then(_ => window.location = '/man')
+        );
+
+        let toto = 
+            vv('pre', [vv('code').html(M => M.toto)])
+                .model({toto: totos[0]})
+                .plant('#toto')
+                .up('dom')
+                .up('toto')
+                .on('click', click);
+
+        vv('.flex-v.big.toto-code', [
             ['.grow'],
             ['.flex-h', [
                 ['.grow'],
-                toto,
+                ['#toto'],
                 ['.grow']
             ]],
             ['.grow']

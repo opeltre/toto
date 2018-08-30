@@ -1,15 +1,20 @@
-// rest.js 
+// toto.js 
 
 let sh = require('./sh'),
     path = require('path'),
     md = require('./md'),
     {__, _vv, vv_, vv} = require('../dist/vv_back.js');
 
-let icon = i => vv('div.icon', [
-    ['img', {src: `/images/win95icons/Icon_${i}.ico`}]
-]);
+let isReadme = f => /README\.(md|html)$/.test(f.name);
 
-
+let ICON = 
+    '00';
+let INDENTS = [
+    '../ ',
+    '`-- ./ ',
+    '  `-- '
+];
+                
 /***    main    ***/
 function main (dir, alias=dir) {
 
@@ -28,7 +33,7 @@ function main (dir, alias=dir) {
     };
 
     let BUTTONS = {
-        '.pdf' : [ vv('a', {href : M => M.view }, [icon(16)]) ]
+        '.pdf' : [ vv('a.toto-btn', {href : M => M.view }, ['pdf']) ]
     }
 
     let _F = vv_.forest()
@@ -68,7 +73,7 @@ function main (dir, alias=dir) {
         if (!focus.dir) 
             return (READERS[focus.ext] || READERS['.html'])(focus);
 
-        let [readme] = ls.filter(a => a.name === 'README.md');
+        let [readme] = ls.filter(isReadme)
         return readme ? read({focus: readme}) : Promise.resolve(focus.name);
     }
 
@@ -78,8 +83,8 @@ function main (dir, alias=dir) {
             ({focus}) => href(focus.path).split('/').slice(1),
             S => S
                 .map((s,i) => [
-                    vv('span.delim', ['/']),
-                    vv('a')
+                    vv('span.toto-head1', ['/']),
+                    vv('a.toto-head0')
                         .attr({href: '/' + S.slice(0,i+1).join('/')})
                         .html(s)
                 ])
@@ -87,7 +92,7 @@ function main (dir, alias=dir) {
         );
 
         return vv('#toto-head.flex-h', [ 
-            ['a#toto-home', {href:'/'}, [icon(14)]],
+            ['a#toto-home.toto-head1', {href:'/'}, [ICON]],
             ['#toto-pathseq', pathSeq],
             ['span.grow']
         ]);
@@ -126,7 +131,7 @@ function nav (dir, alias=dir) {
 
     return vv('#toto-nav', 
         M => [M['../'], M['./'], ...M.ls]
-            .filter(a => a.name !== 'README.md')
+            .filter(f => !isReadme(f))
             .map(format(M.focus))
             .map(a => vv('div', [a]))
     );
@@ -134,13 +139,13 @@ function nav (dir, alias=dir) {
     function format (f) {
         return (a,i) => {
 
-            let indent = 
-                [
-                    '../ ',
-                    '`-> ./ ',
-                    '  `-> '
-                ]
-                [Math.min(i, 2)];
+            Object.assign(a, 
+                a.path === path.join(dir,'..')
+                    ? { href: '/', name: '/'}
+                    : { href: a.path.replace(sh.pwd(dir), alias)}
+            );
+          
+            let indent = INDENTS[Math.min(i, 2)];
 
             let focus = 
                 a.path === f.path.replace(/\/$/, '');
@@ -148,15 +153,10 @@ function nav (dir, alias=dir) {
             let tag = 'a'
                 + (a.dir ? '.dir' : '.file')
                 + (focus ? '.focus' : '');
-
-            let href = 
-                a.path === path.join(dir,'..')
-                    ? '/'
-                    : a.path.replace(sh.pwd(dir), alias);
-          
+             
             return vv(
                 tag,
-                {href},
+                {href: a.href},
                 [vv('pre').html(indent + a.name)]
             );
         };

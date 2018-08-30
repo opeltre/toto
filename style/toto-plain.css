@@ -1,0 +1,47 @@
+#toto-view {
+    border: 5px solid #ccc;
+    background-color: #fff;
+}
+
+
+#toto-pathseq {
+    font-size: 20px;
+}
+.toto-head0, .toto-head1:hover {
+    color: #a54;
+}    
+.toto-head0:hover, .toto-head1 {
+    color: #d98;
+}
+
+
+#toto-nav a {
+    font-size: smaller;
+}
+#toto-nav a.dir {
+    color: #a54;
+}
+#toto-nav a.focus.dir {
+    color: #d98 !important;
+}
+#toto-nav a.file {
+    color: #556;
+}
+#toto-nav a.file.focus {
+    color: #99a !important;
+}
+
+
+#toto-html pre, #toto-html code {
+    background-color: #333;
+    color: #eee;
+}
+
+
+.toto-btn {
+    border: solid 1px #d98;
+    padding: 5px;
+    color: #a54;
+}
+
+

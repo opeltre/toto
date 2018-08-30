@@ -19,9 +19,6 @@
 .stretch {
     align-items: stretch;
 }
-.ft0, .ft0 * {
-    font-family: 'GlacialIndifference';
-}
 .center {
     text-align: center;
 }

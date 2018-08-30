@@ -6,9 +6,8 @@
     display: flex;
     flex-flow: column;
 }
-.big {
-    min-height: 100%;
-    height: 100%;
+.tall {
+    min-height: 100vh;
 }
 .grow {
     flex-grow: 1;

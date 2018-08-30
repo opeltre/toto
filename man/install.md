@@ -1,6 +1,6 @@
 # Setup guide
 
-Toto runs in [nodejs](https://nodejs.org) -
+Toto runs in [nodejs](https://nodejs.org):
 best installed via [nvm](https://github.com/creationix/nvm).
 
 ## Installation:

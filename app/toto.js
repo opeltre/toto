@@ -8,7 +8,7 @@ let sh = require('./sh'),
 let isReadme = f => /README\.(md|html)$/.test(f.name);
 
 let ICON = 
-    '00';
+    '[0+0]';
 let INDENTS = [
     '../ ',
     '`-- ./ ',
@@ -61,7 +61,7 @@ function main (dir, alias=dir) {
     ]);
 
     return _F.use(
-        vv('#toto-div.flex-v.big', [
+        vv('#toto-div.flex-v.tall', [
             head(),
             body(), 
             foot()

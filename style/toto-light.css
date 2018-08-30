@@ -16,7 +16,7 @@ html, #toto-div, #toto-nav {
 
 
 #toto-nav a {
-    font-size: smaller;
+    font-size: small;
 }
 #toto-nav a.dir {
     color: #556;

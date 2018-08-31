@@ -22,14 +22,16 @@ function main (dir, alias=dir) {
 
     let READERS = {
         '.html'     : f => sh.cat(f.path).then(PARSERS[f.ext] || __.id),
-        '.pdf'  : f => '/raw' + href(f.path)
+        '.pdf'  : f => '/raw' + href(f.path),
+        '.png'  : f => '/raw' + href(f.path)
     }
     let PARSERS = {
         '.md': md
     };
     let VIEWERS = {
         '.html' : [ vv('#toto-html').html(M => M.view) ],
-        '.pdf'  : [ vv('iframe#toto-pdf', {src: M => M.view}) ]
+        '.pdf'  : [ vv('iframe#toto-pdf', {src: M => M.view}) ],
+        '.png'  : [ vv('img#toto-img', {src: M => M.view}) ]
     };
 
     let BUTTONS = {

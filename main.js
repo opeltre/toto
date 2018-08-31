@@ -15,14 +15,14 @@ let express = require('express'),
  */
 let D = conf.parse(conf.dft, module); 
 
-function mount ({path, href, style, scripts}) {
+function mount ({path, href, scripts, style}) {
 
     let totoMt = 
         app => app.get(
             $('/', href + '*'),
             toto(path, $('/', href))
-                .style(style || D.style)
-                .scripts(scripts || D.scripts)
+                .style([style, ...D.style])
+                .scripts(D.scripts)
         );
 
     let rawMt =
@@ -52,7 +52,7 @@ function router (C) {
         .forEach(__.$(app));
 
     (C.dirs || D.dirs)
-        .map(mount)
+        .map(d => mount(d, C.theme))
         .forEach(__.$(app));
 
     app.get('/', (_, res) => res.sendFile(C.index));
@@ -60,7 +60,7 @@ function router (C) {
     return app;
 }
 
-function server (C = D) {
+function server (C=D) {
     
     let srv = express(),
         app = router(C);

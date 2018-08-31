@@ -53,16 +53,13 @@ exports.parse  = (C, module) => {
     let abs_path = d => 
         Object.assign(d, {path : abs(d.path)});
 
-    let theme = C => [ 
-        'toto-' + (C.theme || 'lunar'),
-        ...(C.style || [])
-    ]
-
+    let theme = d => 
+        Object.assign(d, {style : 'toto-' + (C.theme || 'lunar')});
+    
     return Object.assign(C, {
-        dirs : (C.dirs || []).map(abs_path),
+        dirs : (C.dirs || []).map(abs_path).map(theme),
         static : (C.static || []).map(abs),
         index : abs(C.index || 'index.html'),
-        style : theme(C)
     });
 
 }

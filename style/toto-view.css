@@ -6,7 +6,7 @@
 
 #toto-html {
     max-width: 650px; 
-    margin: 20 auto 20 auto;
+    margin: 30 auto 30 auto;
 }
 #toto-html pre, #toto-html code {
     max-width: 550px;
@@ -14,6 +14,7 @@
 #toto-html pre {
     padding: 15px;
     margin: 0 30 0 30;
+    overflow-y: auto;
 }
 
 
@@ -25,3 +26,8 @@
     margin: 0;
 }
 
+#toto-img {
+    max-width: 600px;
+    display: block;
+    margin: 30 auto 30 auto;
+}

@@ -11,8 +11,11 @@ exports.dft = {
 
     dirs : [
         {
-            path: './man', 
-            href: 'man'
+            path : './man', 
+            href : 'man'
+        },{
+            path : './docs',
+            href : 'docs'
         }
     ],
 

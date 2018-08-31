@@ -1,6 +1,6 @@
 # Setup guide
 
-Toto runs in [nodejs](https://nodejs.org):
+Toto runs in [node](https://nodejs.org):
 best installed via [nvm](https://github.com/creationix/nvm).
 
 ## Installation:
@@ -24,9 +24,7 @@ Create a launch file with your favorite text editor:
 ```javascript
 // toto.js
 
-let toto = require('totojs');
-
-let config = {
+require('totojs').server({
     port: 80,   
     index: 'index.html',
     dirs: [
@@ -37,10 +35,8 @@ let config = {
             path : '<path-to-other-dir>',
             href : '<url-to-other-dir>'
         }
-    ],
-};
-
-toto.server(config);
+    ]
+});
 ```
 
 Run it with: 
@@ -54,13 +50,13 @@ $ sudo node toto.js
 The default HTTP port is 80 and root-reserved, 
 so root needs a working node installation.
 
-If you are unsure of the superuser's node installation, 
+If you are unsure of your super-user's node installation, 
 try listening on available ports above 1024 as your own user.
 
 ## Process monitoring: 
 
 You can use [pm2](http://pm2.keymetrics.io/)
-to run toto in the background: 
+to keep toto running in the background: 
 
 ```
 $ npm i pm2

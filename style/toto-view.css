@@ -5,14 +5,14 @@
 }
 
 #toto-html {
-    max-width: 700px; 
+    max-width: 650px; 
     margin: 20 auto 20 auto;
 }
 #toto-html pre, #toto-html code {
-    max-width: 600px;
+    max-width: 550px;
 }
 #toto-html pre {
-    padding: 20px;
+    padding: 15px;
     margin: 0 30 0 30;
 }
 

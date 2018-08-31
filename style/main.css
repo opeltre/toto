@@ -12,3 +12,6 @@ a {
     text-decoration: none;
     color: #a54;
 }
+ul {
+    list-style-type: ' - ';
+}

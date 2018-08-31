@@ -4,7 +4,7 @@ module.exports = {
     apps: [{
         name: 'toto',
         watch: ['./'],
-        ignore_watch: ['root'],
+        ignore_watch: ['man'],
         script: 'main.js',
 	env: 'development'
     }]

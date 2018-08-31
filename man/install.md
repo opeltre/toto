@@ -60,5 +60,6 @@ to keep toto running in the background:
 
 ```
 $ npm i pm2
-$ sudo pm2 start toto.js --watch
+$ sudo pm2 start toto.js --watch 
 ```
+

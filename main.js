@@ -47,18 +47,15 @@ function router (C) {
 
     let app = express.Router();
 
-    app.get(
-        '/', 
-        (req, res) => res.sendFile(C.index)
-    );
+    [...(C.static || []), ...D.static]
+        .map(statique)
+        .forEach(__.$(app));
 
     (C.dirs || D.dirs)
         .map(mount)
         .forEach(__.$(app));
 
-    [...(C.static || []), ...D.static]
-        .map(statique)
-        .forEach(__.$(app));
+    app.get('/', (_, res) => res.sendFile(C.index));
 
     return app;
 }

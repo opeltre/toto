@@ -13,9 +13,6 @@ exports.dft = {
         {
             path : './man', 
             href : 'man'
-        },{
-            path : './docs',
-            href : 'docs'
         }
     ],
 

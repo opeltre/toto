@@ -33,7 +33,7 @@ Files can be:
     * [markdown][2]
 - boxed in:
     * pdf 
-- ... 
+- and png, jpg...
 
 TeX code in html or markdown files is rendered by [mathjax][4].
 

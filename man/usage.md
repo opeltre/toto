@@ -19,12 +19,12 @@ with a url prefix to be used as virtual mountpoint.
 ```js
 let cats = {
     path: '../cats', 
-    href: 'cats'
+    href: 'meow'
 };
 
 toto({dirs: [cats]});
 
-//  -> cat gifs at http://abc.xyz/cats !
+//  -> cat gifs at http://abc.xyz/meow !
 ```
 
 Files can be: 
@@ -50,20 +50,13 @@ Instead, roots fly you to the index:
 ```js
 toto({index: 'myCrazyIndex.html'});
 ```
-It is a feature allowing toto's friends to enter your website.
-
-If you love toto and don't need an exit door,
-a single mount with an empty prefix will do the trick.
-```js
-toto({
-    dirs: [{path: './root', href: ''}]
-});
-```
+It is a feature, but if you love toto and don't need an exit door 
+wait for v1.
 
 ## Static service: 
 
-Toto accepts an array of directories for plain old static service.
-Include images in your markdown and sounds to your html for more fun!
+Toto accepts an array of directories for plain old static service,
+so you can embed images and sounds for a true synesthetic experience.
 
 ```
 toto({
@@ -82,10 +75,6 @@ toto.server({
 //        'lunar'     // cold and quiet
 //        'light'     // gay and joyful
 })
-
-                              ~   <
-                            ( 0 + - )
-                                U
 ```
 
 [1]: https://en.wikipedia.org/wiki/Representational_state_transfer 

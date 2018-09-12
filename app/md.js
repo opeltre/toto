@@ -23,33 +23,34 @@ lexer ::
 
 */
 
-let inlineMath = lexer()
-    ._name('imath')
-    .read([ /(\\){1,2}\(/, /(\\){1,2}\)/ ])
-    .write([
-        '<script type="math/tex">',
-        '</script>'
-    ])
+let lexemes = [
 
-let displayMath = lexer()
-    ._name('math')
-    .read([ /(\\){1,2}\[/, /(\\){1,2}\]/ ])
-    .write([
-        '<script type="math/tex; mode=display">',
-        '</script>'
-    ]);
+    lexer()
+        ._name('imath')
+        .read([ /(\\){1,2}\(/, /(\\){1,2}\)/ ])
+        .write([
+            '<script type="math/tex">',
+            '</script>'
+        ]),
 
-let code = lexer() 
-    ._name('code')
-    .read([ /`/, /`/ ])
-    .write(['`', '`']);
+    lexer()
+        ._name('math')
+        .read([ /(\\){1,2}\[/, /(\\){1,2}\]/ ])
+        .write([
+            '<script type="math/tex; mode=display">',
+            '</script>'
+        ]),
 
-let codeblock = lexer()
-    ._name('codeblock')
-    .read([ /```/, /```/])
-    .write(['```', '```']);
+    lexer() 
+        ._name('code')
+        .read([ /`/, /`/ ])
+        .write(['`', '`']),
 
-let lexemes = [inlineMath, displayMath, code, codeblock];
+    lexer()
+        ._name('codeblock')
+        .read([ /```/, /```/])
+        .write(['```', '```'])
+];
 
 function parser (text) {
     
@@ -114,40 +115,40 @@ function parser (text) {
 
 module.exports = parser;
 
-    function lexer (C) {
+function lexer (C) {
 
-        let self = {
-                _name : '<lexer>',
-                read :  null,
-                write : null,
-                state : 0,
-            };
+    let self = {
+            _name : '<lexer>',
+            read :  null,
+            write : null,
+            state : 0,
+        };
 
-        Object.assign(self, C || {});
+    Object.assign(self, C || {});
 
-        let lex = __.pipe(
-            m => Object.assign({},
-                self, 
-                {state : (self.state + !!m) % 2}
-            ),
-            lexer
-        );
+    let lex = __.pipe(
+        m => Object.assign({},
+            self, 
+            {state : (self.state + !!m) % 2}
+        ),
+        lexer
+    );
 
-        function my (str) {
+    function my (str) {
 
-            let i = self.state;
-            let m = str.match(self.read[i]);
+        let i = self.state;
+        let m = str.match(self.read[i]);
 
-            return {
-                match : m && [
-                    str.slice(0, m.index), 
-                    self.write[i],
-                    str.slice(m.index + m[0].length)
-                ],
-                index : m && m.index,
-                lex : lex,
-            };
-        }
-
-        return __.getset(my, self);
+        return {
+            match : m && [
+                str.slice(0, m.index), 
+                self.write[i],
+                str.slice(m.index + m[0].length)
+            ],
+            index : m && m.index,
+            lex : lex,
+        };
     }
+
+    return __.getset(my, self);
+}

@@ -10,7 +10,7 @@ Download the npm package to a directory of your choice:
 $ cd /srv/http/<my-server>
 $ npm i totojs
 ```
-Run it with:
+Dry-run it with:
 ```bash
 $ node node_modules/totojs/main.js
 ```
@@ -19,7 +19,7 @@ The default server should now be listening on port 8090 of your machine.
 ## Configuration: 
 
 
-Create a launch file with your favorite text editor:
+Create a launch file with your favourite text editor:
 
 ```javascript
 // toto.js

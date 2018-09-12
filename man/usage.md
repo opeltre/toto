@@ -19,12 +19,12 @@ with a url prefix to be used as virtual mountpoint.
 ```js
 let cats = {
     path: '../cats', 
-    href: 'meow'
+    href: 'meeoow'
 };
 
 toto({dirs: [cats]});
 
-//  -> cat gifs at http://abc.xyz/meow !
+//  -> cat gifs at http://abc.xyz/meeoow !
 ```
 
 Files can be: 
@@ -36,6 +36,9 @@ Files can be:
 - and png, jpg...
 
 TeX code in html or markdown files is rendered by [mathjax][4].
+\[ \int_\Omega d\alpha = \int_{\partial \Omega} d\alpha \]
+Yes it is!  Just use `\( ... \)` and `\[ ... \]` for
+inline and display delimiters.
 
 When serving a directory, 
 toto will look for a README.md or README.html 

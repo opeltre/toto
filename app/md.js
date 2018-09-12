@@ -58,7 +58,7 @@ function parser (text) {
         eqToken = i => '$TeX%' + i + '$';
 
     let insertEq = (eq, i) => 
-        txt => txt.replace(__.log(eqToken(i)), eq);
+        txt => txt.replace(eqToken(i), eq);
 
     let insertEqs = text => 
         __.pipe(...eqs.map(insertEq))(text);
@@ -79,17 +79,13 @@ function parser (text) {
         if (!m) return (str);
 
         let l = m.lex(0);
-        console.log(l._name());
-        console.log(l.state());
         let before, after;
         
         if (l._name() === 'imath') {
             if (!l.state()) {
-                console.log('imath opens')
                 before = m.match[0];
                 after = m.match[1] + m.match[2];
             } else {
-                console.log('imath closes')
                 before = eqToken(eqs.length);
                 after = m.match[2];
                 eqs.push(m.match[0] + m.match[1]);
@@ -100,13 +96,10 @@ function parser (text) {
             after = m.match[2];
         }
 
-        lex = __.log(
-            !l.state() 
-                ? [m.lex(1)]
-                : lexemes
-        );
+        lex = !l.state() 
+            ? [m.lex(1)]
+            : lexemes;
         
-        console.log(eqs);
         return before + read(after, lex);
     }
 

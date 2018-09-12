@@ -21,10 +21,9 @@ function main (dir, alias=dir) {
     let href = path => path.replace(dir, alias);
 
     let READERS = {
-        '.html'     : f => sh.cat(f.path).then(PARSERS[f.ext] || __.id),
-        '.pdf'  : f => '/raw' + href(f.path),
-        '.png'  : f => '/raw' + href(f.path),
-        '.jpg'  : f => '/raw' + href(f.path)
+        '.md'   : f => sh.cat(f.path).then(PARSERS['.md']),
+        '.html' : f => sh.cat(f.path),
+        '*'  : f => '/raw' + href(f.path),
     }
     let PARSERS = {
         '.md': md
@@ -75,7 +74,7 @@ function main (dir, alias=dir) {
     function read ({focus, ls}) {
 
         if (!focus.dir) 
-            return (READERS[focus.ext] || READERS['.html'])(focus);
+            return (READERS[focus.ext] || READERS['*'])(focus);
 
         let [readme] = ls.filter(isReadme)
         return readme ? read({focus: readme}) : Promise.resolve(focus.name);

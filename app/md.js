@@ -23,26 +23,36 @@ lexer ::
 
 */
 
+let inlineMath = lexer()
+    ._name('imath')
+    .read([ /(\\){1,2}\(/, /(\\){1,2}\)/ ])
+    .write([
+        '<script type="math/tex">',
+        '</script>'
+    ])
+
+let displayMath = lexer()
+    ._name('math')
+    .read([ /(\\){1,2}\[/, /(\\){1,2}\]/ ])
+    .write([
+        '<script type="math/tex; mode=display">',
+        '</script>'
+    ]);
+
+let code = lexer() 
+    ._name('code')
+    .read([ /`/, /`/ ])
+    .write(['`', '`']);
+
+let codeblock = lexer()
+    ._name('codeblock')
+    .read([ /```/, /```/])
+    .write(['```', '```']);
+
+let lexemes = [inlineMath, displayMath, code, codeblock];
+
 function parser (text) {
     
-    let inlineMath = lexer()
-        ._name('imath')
-        .read([ /(\\){1,2}\(/, /(\\){1,2}\)/ ])
-        .write([
-            '<script type="math/tex">',
-            '</script>'
-        ])
-
-    let displayMath = lexer()
-        ._name('math')
-        .read([ /(\\){1,2}\[/, /(\\){1,2}\]/ ])
-        .write([
-            '<script type="math/tex; mode=display">',
-            '</script>'
-        ]);
-
-    let lex = [inlineMath, displayMath];
-
     let eqs = [],
         eqToken = i => '$TeX%' + i + '$';
 
@@ -58,9 +68,9 @@ function parser (text) {
         insertEqs
     )(text);
 
-    function read (str, lexers=lex) {
+    function read (str, lex=lexemes) {
         
-        let [m, ...ms] = lexers
+        let [m, ...ms] = lex
             .map(__.$(str))
             .filter(x => x.match)
             .sort((x,y) => x.index >= y.index);
@@ -68,6 +78,7 @@ function parser (text) {
         if (!m) return (str);
 
         let l = m.lex(0);
+        console.log(l._name());
         console.log(l.state());
         let before, after;
         
@@ -88,11 +99,20 @@ function parser (text) {
             after = m.match[2];
         }
 
-        let lex = [m.lex(1), ...ms.map(n => n.lex(0))];
-
+        lex = __.log(
+            !l.state() 
+                ? [m.lex(1)]
+                : lexemes
+        );
+        
         console.log(eqs);
         return before + read(after, lex);
     }
+
+
+}
+
+module.exports = parser;
 
     function lexer (C) {
 
@@ -106,7 +126,7 @@ function parser (text) {
         Object.assign(self, C || {});
 
         let lex = __.pipe(
-            m => Object.assign(
+            m => Object.assign({},
                 self, 
                 {state : (self.state + !!m) % 2}
             ),
@@ -131,7 +151,3 @@ function parser (text) {
 
         return __.getset(my, self);
     }
-
-}
-
-module.exports = parser;

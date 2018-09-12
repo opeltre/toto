@@ -2,7 +2,6 @@ let {__} = require('../dist/vv_back');
 let marked = require('marked');
 
 /* 
-
 Lexer :: 
     Str  
     ->  
@@ -44,48 +43,54 @@ function parser (text) {
 
     let lex = [inlineMath, displayMath];
 
-    let MATH = false;
-    let INLINE = false;
+    let eqs = [],
+        eqToken = i => '$TeX%' + i + '$';
 
-    return read(text);
+    let insertEq = (eq, i) => 
+        txt => txt.replace(__.log(eqToken(i)), eq);
 
-    function mark (lexer) {
+    let insertEqs = text => 
+        __.pipe(...eqs.map(insertEq))(text);
 
-        let name = 
-            lexer._name && lexer._name();
-
-        let strip = [
-            INLINE
-                ? str => str.replace(/^\s*<p>/, '') 
-                : __.id,
-            name === 'imath'
-                ? str => str.replace(/<\/p>\s*$/, '')
-                : __.id
-        ];
-        INLINE = name === 'imath';
-
-        return __.pipe(marked, ...strip);
-    }
+    return __.pipe(
+        read,
+        marked,
+        insertEqs
+    )(text);
 
     function read (str, lexers=lex) {
         
-        let matches = lexers
+        let [m, ...ms] = lexers
             .map(__.$(str))
             .filter(x => x.match)
             .sort((x,y) => x.index >= y.index);
 
-        if (!matches.length)
-            return mark({})(str);
+        if (!m) return (str);
 
-        let {lexer, match} = matches[0];
+        let l = m.lex(0);
+        console.log(l.state());
+        let before, after;
+        
+        if (l._name() === 'imath') {
+            if (!l.state()) {
+                console.log('imath opens')
+                before = m.match[0];
+                after = m.match[1] + m.match[2];
+            } else {
+                console.log('imath closes')
+                before = eqToken(eqs.length);
+                after = m.match[2];
+                eqs.push(m.match[0] + m.match[1]);
+            }
+        } 
+        else {
+            before = m.match[0] + m.match[1];
+            after = m.match[2];
+        }
 
-        let md = MATH ? __.id : mark(lexer);
-        MATH = !MATH;
+        let lex = [m.lex(1), ...ms.map(n => n.lex(0))];
 
-        let before = md(match[0]) + match[1],
-            after = match[2],
-            lex = matches.map(x => x.lexer);
-
+        console.log(eqs);
         return before + read(after, lex);
     }
 
@@ -120,7 +125,7 @@ function parser (text) {
                     str.slice(m.index + m[0].length)
                 ],
                 index : m && m.index,
-                lexer : lex(m),
+                lex : lex,
             };
         }
 
